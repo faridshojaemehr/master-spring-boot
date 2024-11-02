@@ -46,11 +46,10 @@ public class Application {
 			@RequestHeader("Content-Type") String contentType,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") SortingOrder sort,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-
-		System.out.println(method);
-		System.out.println("response => " + response.isCommitted());
-		System.out.println("request => " + request.getLocalAddr());
-		System.out.println(contentType);
+//		System.out.println(method);
+//		System.out.println("response => " + response.isCommitted());
+//		System.out.println("request => " + request.getLocalAddr());
+//		System.out.println(contentType);
 		List<Person> people1 = people.stream()
 				.sorted(sort == SortingOrder.DESC ? Comparator.comparing(Person::id).reversed() : Comparator.comparing(Person::id))
 				.collect(Collectors.toList());
