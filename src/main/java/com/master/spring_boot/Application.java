@@ -1,7 +1,11 @@
 package com.master.spring_boot;
 
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,6 +17,7 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 @RestController
+@RequestMapping("api/v1/person")
 public class Application {
 
 	public static void main(String[] args) {
@@ -34,28 +39,39 @@ public class Application {
 	}
 
 	@GetMapping
-	public List<Person> getPersons(
+	public ResponseEntity<List<Person>> getPersons(
+			HttpMethod method,
+			ServletResponse response,
+			ServletRequest request,
+			@RequestHeader("Content-Type") String contentType,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") SortingOrder sort,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-		return people.stream()
+
+		System.out.println(method);
+		System.out.println("response => " + response.isCommitted());
+		System.out.println("request => " + request.getLocalAddr());
+		System.out.println(contentType);
+		List<Person> people1 = people.stream()
 				.sorted(sort == SortingOrder.DESC ? Comparator.comparing(Person::id).reversed() : Comparator.comparing(Person::id))
 				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(people1);
 	}
 
 
 	@GetMapping("{id}")
-	public Optional<Person> getPersonById(
+	public ResponseEntity<Optional<Person>> getPersonById(
 			@PathVariable("id") int id
 			){
-		return people.stream()
+		Optional<Person> selectedPerson = people.stream()
 				.filter(person -> person.id.equals(id)).findFirst();
+		return ResponseEntity.ok().body(selectedPerson);
 	}
 
 
 	@PostMapping("/add")
-	public String addPerson(@RequestBody Person person) {
-		people.add( new Person(idGenerator.incrementAndGet(),person.name,person.age(),person.gender));
-		return "created successfully";
+	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+		people.add(new Person(idGenerator.incrementAndGet(),person.name,person.age(),person.gender));
+		return ResponseEntity.ok().body(person);
 	}
 
 	@PutMapping("{id}")
@@ -87,11 +103,11 @@ public class Application {
 	}
 
 	@DeleteMapping("{id}")
-	public List<Person> findPersonById(
+	public ResponseEntity<List<Person>> findPersonById(
 			@PathVariable("id") int id
 	){
 		people.removeIf(person -> person.id.equals(id));
-		return people;
+		return ResponseEntity.ok().body(people);
 	}
 
 }
