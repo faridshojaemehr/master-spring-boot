@@ -20,7 +20,6 @@ public class PersonRepository {
         people.add(new Person(idGenerator.incrementAndGet(),"Mary",28,Gender.FEMALE));
     }
 
-
     public AtomicInteger getIdGenerator() {
         return idGenerator;
     }
