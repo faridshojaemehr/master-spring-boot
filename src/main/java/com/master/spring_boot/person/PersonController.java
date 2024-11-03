@@ -29,8 +29,8 @@ public class PersonController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Person>> getPersonById(@PathVariable("id") Integer id){
-        Optional<Person> selectedPerson = personService.getPersonById(id);
+    public ResponseEntity<Person> getPersonById(@PathVariable("id") Integer id){
+        Person selectedPerson = personService.getPersonById(id);
         return ResponseEntity.ok().body(selectedPerson);
     }
 
