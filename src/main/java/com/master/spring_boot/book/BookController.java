@@ -1,7 +1,7 @@
-package com.master.spring_boot.Book;
+package com.master.spring_boot.book;
 
 
-import com.master.spring_boot.Utils.SortingOrder;
+import com.master.spring_boot.utils.SortingOrder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/book")
+@RequestMapping("api/v1/books")
 public class BookController {
 
     private final BookService bookService;

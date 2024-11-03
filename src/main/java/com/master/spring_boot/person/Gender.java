@@ -1,4 +1,4 @@
-package com.master.spring_boot.Person;
+package com.master.spring_boot.person;
 
 public enum Gender {
     MALE, FEMALE

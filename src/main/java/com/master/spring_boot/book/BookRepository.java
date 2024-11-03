@@ -1,4 +1,4 @@
-package com.master.spring_boot.Book;
+package com.master.spring_boot.book;
 
 import org.springframework.stereotype.Repository;
 

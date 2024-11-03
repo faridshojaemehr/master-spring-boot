@@ -1,7 +1,7 @@
-package com.master.spring_boot.Person;
+package com.master.spring_boot.person;
 
 
-import com.master.spring_boot.Utils.SortingOrder;
+import com.master.spring_boot.utils.SortingOrder;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -31,8 +31,16 @@ public class PersonService {
     }
 
 
-    public void addPerson(Person person) {
-        personRepository.getPeople().add(new Person(personRepository.idGenerator.incrementAndGet(),person.name(),person.age(),person.gender()));
+    public void addPerson(NewPersonRequest newPerson) {
+        personRepository.getPeople()
+                .add(
+                        new Person(
+                                personRepository.idGenerator.incrementAndGet(),
+                                newPerson.name(),
+                                newPerson.age(),
+                                newPerson.gender()
+                        )
+                );
     }
 
     public void updatePerson(Integer id,PersonUpdateRequest personUpdate) {

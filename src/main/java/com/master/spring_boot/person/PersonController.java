@@ -1,13 +1,17 @@
-package com.master.spring_boot.Person;
+package com.master.spring_boot.person;
 
-import com.master.spring_boot.Utils.SortingOrder;
+import com.master.spring_boot.utils.SortingOrder;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/person")
+@Validated
+@RequestMapping("api/v1/persons")
 public class PersonController {
 
     private final PersonService personService;
@@ -32,17 +36,20 @@ public class PersonController {
 
 
     @PostMapping("/addPerson")
-    public void addPerson(@RequestBody Person person) {
-        personService.addPerson(person);
+    public void addPerson(@RequestBody @Valid NewPersonRequest newPerson) {
+        personService.addPerson(newPerson);
     }
 
     @PutMapping("{id}")
-    public void updatePerson(@PathVariable Integer id, @RequestBody PersonUpdateRequest personUpdate) {
+    public void updatePerson(@Valid @PathVariable Integer id, @RequestBody PersonUpdateRequest personUpdate) {
        personService.updatePerson(id, personUpdate);
     }
 
     @DeleteMapping("{id}")
-    public void findPersonById(@PathVariable("id") Integer id){
+    public void deletePersonById(
+            @Valid
+            @Positive
+            @PathVariable("id") Integer id){
         personService.deletePersonById(id);
     }
 }

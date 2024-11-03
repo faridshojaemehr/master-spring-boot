@@ -1,7 +1,6 @@
-package com.master.spring_boot.Book;
+package com.master.spring_boot.book;
 
-import com.master.spring_boot.Person.Person;
-import com.master.spring_boot.Utils.SortingOrder;
+import com.master.spring_boot.utils.SortingOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

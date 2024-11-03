@@ -1,4 +1,4 @@
-package com.master.spring_boot.Person;
+package com.master.spring_boot.person;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +24,7 @@ public class PersonRepository {
         return idGenerator;
     }
 
-    public List<Person> getPeople() {
+    public List<Person>  getPeople() {
         return people;
     }
 }
