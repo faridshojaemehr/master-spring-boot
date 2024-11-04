@@ -19,7 +19,6 @@ public class PersonController {
         this.personService = personService;
     }
 
-
     @GetMapping
     public List<Person> getPeople(
             @RequestParam(value = "sort", required = false, defaultValue = "ASC") SortingOrder sort
@@ -30,8 +29,8 @@ public class PersonController {
 
     @GetMapping("{id}")
     public ResponseEntity<Person> getPersonById(@PathVariable("id") Integer id){
-        Person selectedPerson = personService.getPersonById(id);
-        return ResponseEntity.ok().body(selectedPerson);
+        Person personById = personService.getPersonById(id);
+        return ResponseEntity.ok(personById);
     }
 
 
