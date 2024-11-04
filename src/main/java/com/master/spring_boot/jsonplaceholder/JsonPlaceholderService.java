@@ -23,6 +23,6 @@ public interface JsonPlaceholderService{
     Post updatePost(@PathVariable("id") Integer id,@RequestBody Post post);
 
     @DeleteExchange("/posts/{id}")
-    void deletePost(@PathVariable("id") Integer id);
+    void deletePostById(@PathVariable("id") Integer id);
 
 }
