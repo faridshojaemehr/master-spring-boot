@@ -4,6 +4,7 @@ package com.master.spring_boot.person;
 import com.master.spring_boot.exception.DuplicateResourseException;
 import com.master.spring_boot.exception.ResourceNotFoundException;
 import com.master.spring_boot.utils.SortingOrder;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -23,7 +24,7 @@ public class PersonService {
 
 
     public List<Person> getPeople(SortingOrder sort){
-        return personRepository.findAll();
+        return personRepository.findAll(Sort.by(Sort.Direction.valueOf(sort.name()),"id"));
     }
 
 
